@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PDF</title>
+    <style>
+        /* Estilos CSS para el contenedor */
+        .mi-contenedor {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border: 1px solid #f8f8f8;
+            border-radius: 5px;
+        }
+        .mi-contenedor {
+             width: 270mm;
+             height: 297mm;
+             margin: 0 auto;
+            }
+
+
+        /* Estilos CSS para la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+
+        th, td {
+            border: 1px solid rgb(14, 2, 2); /* Establecer el borde en color negro */
+            padding: 8px;
+            text-align: center;
+            width: 12.5%; /* Establecer el ancho fijo para todas las celdas (100% / 8 columnas) */
+            height: 15px; /* Establecer el alto fijo para todas las celdas */
+        }
+
+        th {
+            background-color: #3c8dbc;
+
+
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Contenedor con clase "mi-contenedor" -->
+    <div class="mi-contenedor">
+        <button id="printButton">Imprimir</button>
+
+        <table>
+            <!-- Filas y celdas de la tabla (8x6) -->
+            <tr>
+                <th colspan="8">INSTITUTO SUPERIOR TECNOLÓGICO GUAYAQUIL
+                    <p>PLANIFICACIÓN MICROCURRICULAR - PROGRAMA ANALÍTICO</p>
+                </th>
+            </tr>
+            <th style="background-color: #3c8dbc" colspan="8">datos informativos</th>
+            <tr>
+                <td>carrera</td>
+                <td>{{ informativo.carrera }}</td>
+                <td>Asignatura</td>
+                <td>{{ informativo.id_asignatura }}</td>
+                <td>Codigo</td>
+                <td>D.SOFT-PRO.VIS.N3.016</td>
+                <td>Campo de formacion</td>
+                <td>{{ informativo.informacion }}</td>
+            </tr>
+            <tr>
+                <td>Periodo</td>
+                <td>{{ informativo.periodo }}</td>
+                <td>prerrequisitos</td>
+                <td>{{ informativo.prerrequisito }}</td>
+                <td>Correquisitos</td>
+                <td>{{ informativo.correquisito }}</td>
+                <td>unidad de organizacion curricular</td>
+                <td>basica</td>
+            </tr>
+            <tr>
+                <td>horas componentes del aprendizaje </td>
+                <td>horas basicas </td>
+                <td>horas docencia   {{ informativo.horas_docencia }}</td>
+                <td>horas practicas </td>
+                <td> con docente {{ informativo.horas_prac_docente }}</td>
+                <td>autonomas {{ informativo.horas_pract_autonoma }}</td>
+                <td>horas de trabajo autonomo  </td>
+                <td>{{ informativo.horas_trab_autonomo }}</td>
+            </tr>
+            <!-- Nueva fila para el Encabezado 2 -->
+            <tr>
+                <th style="background-color: #3c8dbc" colspan="8">Aportes teóricos, metodología de la asignatura a los problemas de la profesión</th>
+            </tr>
+            <tr>
+                <!-- Celda para Encabezado 2 con todas las funciones -->
+                <td colspan="8">
+                     <ul style="text-align: left;">
+                         {% for aporte in aportes_teoricos %}
+                             <li>{{ aporte.detalle|safe }}</li>
+                         {% endfor %}
+                     </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="background-color: #3c8dbc"  colspan="8">Objetivo de la Asignatura</th>
+            </tr>
+            <tr>
+                <!-- Celda para Encabezado 2 con todas las funciones -->
+                <td colspan="8">
+                    <ul>objetivo general</ul>
+                    <ul style="text-align: left;">
+                        <li>{{ informativo.objetivo_general }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <td colspan="8" >
+                <ul>objetivo especificos</ul>
+                <ul style="text-align: left;">
+                    {% for objetivo in objetivo_especifico %}
+                    <li>{{ objetivo.detalle }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <tr>
+                <th style="background-color: #3c8dbc"  colspan="8">Aportes al perfil de egreso de la carrera</th>
+            </tr>
+            <tr>
+                <td>perfil de egreso de la carrera</td>
+                <!-- Celda para Encabezado 2 con todas las funciones -->
+                <td colspan="8">
+                <ul style="text-align: left;">
+                       {% for aporte in aportes_perfil %}
+                       <li>{{ aporte.detalle }}</li>
+                       {% endfor %}
+                </ul>
+                </td>
+            </tr>
+    <tr>
+        <th style="background-color: #3c8dbc" colspan="8">Unidades temáticas</th>
+    </tr>
+    {% for unidad in unidades %}
+    <tr>
+        <th style="background-color: #3c8dbc" colspan="8">Unidad #{{ forloop.counter }}: {{ unidad.nombre }}</th>
+    </tr>
+    <tr>
+        <th style="background-color: #3c8dbc" colspan="8">{{ unidad.objetivo }}</th>
+    </tr>
+    <tr>
+        <th style="background-color: #3c8dbc" colspan="4">contenido</th>
+        <th style="background-color: #3c8dbc" colspan="1">horas docencia</th>
+        <th style="background-color: #3c8dbc" colspan="1">horas practicas docencia</th>
+        <th style="background-color: #3c8dbc" colspan="1">horas gestion practica</th>
+        <th style="background-color: #3c8dbc" colspan="1">horas autonomas</th>
+    </tr>
+    {% for item_unidad in items_unidades %}
+    {% if item_unidad.id_unidad == unidad %}
+    <tr>
+        <td colspan="4" style="text-align: left;">{{ item_unidad.contenido }}</td>
+        <td colspan="1" style="text-align: center;">{{ item_unidad.hora_docencia }}</td>
+        <td colspan="1" style="text-align: center;"></td>
+        <td colspan="1" style="text-align: center;">{{ item_unidad.hora_practica }}</td>
+        <td colspan="1" style="text-align: center;">{{ item_unidad.horas_autonomas }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    <th style="background-color: #3c8dbc" colspan="8" > AMBIENTES DE APRENDIZAJE, MÉTODOS, PROCESOS DE ENSEÑANZA, PROCESOS GENERALES DE EVALUACIÓN PROPUESTOS PARA LA ASIGNATURA </th>
+    <tr>
+    </tr>
+    <td colspan="8">
+    <ul style="text-align: left;">
+    {% for ambiente in ambientes_aprendizaje %}
+    <p>{{ ambiente.detalle }}</p>
+    {% endfor %}
+    </ul>
+</td>
+            <tr>
+
+    <th style="background-color: #3c8dbc" colspan="8">Productos Académicos</th>
+</tr>
+<tr>
+    <th style="background-color: #3c8dbc"> Producto académico final de la Asignatura</th>
+    {% for item in productos_academicosItem %}
+       <td colspan="8">{{ item.detalle }}</td>
+    {% endfor %}
+</tr>
+<tr>
+    <th style="background-color: #3c8dbc" colspan="2">Objetivo</th>
+    <th style="background-color: #3c8dbc" colspan="2">Productos Parciales</th>
+    <th style="background-color: #3c8dbc" colspan="2">Resultados y estándares de presentación</th>
+    <th style="background-color: #3c8dbc" colspan="2">Integración con otras asignaturas</th>
+</tr>
+{% for producto in productos_academicos %}
+<tr>
+    <td colspan="2">{{ producto.objetivo }}</td>
+    <td colspan="2">{{ producto.productos_parciales }}</td>
+    <td colspan="2">{{ producto.resultados }}</td>
+    <td colspan="2">{{ producto.integracion }}</td>
+</tr>
+{% endfor %}
+
+<tr>
+    <th style="background-color: #3c8dbc" colspan="8">Sistema de evaluacion </th>
+</tr>
+<tr>
+</tr>
+<tr>
+    <th style="background-color: #3c8dbc" colspan="3">gestion formativa 30%</th>
+    <th style="background-color: #3c8dbc" colspan="2">gestion practica 30%</th>
+    <th style="background-color: #3c8dbc" colspan="3">examen 40%</th>
+</tr>
+<tr>
+    <td colspan="3">Talleres colaborativos en clases, actuación de clases, investigaciones, presentación y retroalimentación de tareas.</td>
+    <td colspan="2">Tareas autónomas y talleres en clases</td>
+    <td colspan="3">PRIMER PARCIAL
+Examen Teórico - Práctico (60% - 40%)
+SEGUNDO PARCIAL
+Examen Teórico - Práctico (60% - 40%)</td>
+</tr>
+<th style="background-color: #3c8dbc" colspan="8" > referencias </th>
+            <tr>
+    <th style="background-color: #3c8dbc" colspan="1" rowspan="3">Basica</th>
+    <th style="background-color: #3c8dbc" colspan="1">no</th>
+    <th style="background-color: #3c8dbc" colspan="4">Titulo de la obra(Autor,año,nombre de la obra,fuente)(aplicar normas Apa7)</th>
+    <th style="background-color: #3c8dbc" colspan="1">Existencia en biblioteca(definir fisica o digital)</th>
+    <th style="background-color: #3c8dbc" colspan="1">Numero de ejemplares</th>
+</tr>
+<tr>
+    {% for referencia in referencias %}
+    <!--<td colspan="2" rowspan="2">2</td>-->
+    <td colspan="1">1</td>
+    <td colspan="4">{{ referencia.basica }} </td>
+    <td colspan="1">NO EXISTE EN LA BIBLIOTECA</td>
+    <td colspan="1"></td>
+</tr>
+        {% endfor %}
+
+
+<tr>
+    <th style="background-color: #3c8dbc" colspan="1" rowspan="3">complementaria</th>
+    <th style="background-color: #3c8dbc" colspan="1">no</th>
+    <th style="background-color: #3c8dbc" colspan="4">Titulo de la obra(Autor,año,nombre de la obra,fuente)(aplicar normas Apa7)</th>
+    <th style="background-color: #3c8dbc" colspan="1">Existencia en biblioteca(definir fisica o digital)</th>
+    <th style="background-color: #3c8dbc" colspan="1">Numero de ejemplares</th>
+</tr>
+<tr>
+    <!--<td colspan="2">1</td>-->
+    {% for referencia in referencias %}
+        <td colspan="1">1</td>
+        <td colspan="4">{{ referencia.complementaria }}</td>
+        <td colspan="1">NO EXISTE EN LA BIBLIOTECA</td>
+       <td colspan="1"></td>
+    </tr>
+    {% endfor %}
+
+<tr>
+    <th style="background-color: #3c8dbc" colspan="1" rowspan="3">sitios web</th>
+    <th style="background-color: #3c8dbc" colspan="1">no </th>
+    <th style="background-color: #3c8dbc" colspan="6">direccion electronica/url</th>
+</tr>
+<tr>
+    {% for referencia in referencias %}
+        <td colspan="1">1</td>
+        <td colspan="6"> {{ referencia.sitioweb }}</td>
+    </tr>
+    {% endfor %}
+<th style="background-color: #3c8dbc" colspan="8" > firmas de responsabilidad </th>
+<tr>
+    <th style="background-color: #3c8dbc" colspan="2">responsabilidad</th>
+    <th style="background-color: #3c8dbc" colspan="2">Nombre del responsable</th>
+    <th style="background-color: #3c8dbc" colspan="2">Firma</th>
+    <th style="background-color: #3c8dbc" colspan="2">fecha entrega</th>
+</tr>
+<tr>
+
+        <td colspan="2" rowspan="4">Elaborado por: (Docentes)</td>
+    {% for docente in docentes %}
+        <td colspan="2">{{ docente.docente_nombre }}</td>
+        <td colspan="2">{{ docente.firma }}</td>
+        <td colspan="2">{{ docente.fecha_creacion }}</td>
+    </tr>
+    {% endfor %}
+<tr>
+    <td colspan="2">Revisado por: (Jefe de área)</td>
+    {% for docente2 in docentes2 %}
+    <td colspan="2">{{ docente2.nombreJefe }}</td>
+    {% endfor %}
+    <td colspan="2"></td>
+    <td colspan="2"></td>
+
+</tr>
+<tr>
+    <td colspan="2">Aprobado por: (Coordinador de carrera)</td>
+    {% for docente2 in docentes2 %}
+    <td colspan="2">{{ docente2.nombreCoordinador }}</td>
+    {% endfor %}
+    <td colspan="2"></td>
+    <td colspan="2"></td>
+</tr>
+
+        </table>
+    </div>
+    <script>
+        // Obtenemos el botón por su ID
+        const printButton = document.getElementById('printButton');
+
+        // Agregamos un evento de clic al botón
+        printButton.addEventListener('click', () => {
+            // Simulamos la presión de la combinación de teclas Control+P
+            window.print();
+        });
+    </script>
+
+</body>
+
+</html>

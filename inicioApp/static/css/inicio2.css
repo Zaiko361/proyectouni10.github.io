@@ -1,0 +1,98 @@
+.container {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #d9e3e9;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+  }
+
+  h2 {
+    color: #050505;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #030303;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #050505;
+  }
+
+  .button-container {
+    text-align: center;
+  }
+
+  .animated-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #1b07d4;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.4s ease-in-out;
+  }
+
+  .animated-button:hover {
+    background-color: #ff0000;
+  }
+
+  .animated-button:active {
+    position: relative;
+    top: 2px;
+  }
+
+  .create-account {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #0c08d4;
+  }
+
+  .create-account a:hover {
+    text-decoration: underline;
+  }
+  .page-container {
+    background-color: #d9e3e9;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+
+  .container {
+    width: 300px;
+    padding: 30px;
+    background-color: #fdfdfd;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid black;
+  }

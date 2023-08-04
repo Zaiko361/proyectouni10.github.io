@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+  <title>principal</title>
+
+  <meta name="description" content="" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="{% static 'css/boxicons.css' %}" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static 'css/core.css' %}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static 'css/theme-default.css' %}" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="{% static 'css/demo.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/inicio2.css' %}"/>
+
+
+</head>
+
+<body>
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-bolder ms-2"> </span>
+          </a>
+
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </a>
+        </div>
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+          <!-- Dashboard -->
+          <li class="menu-item active">
+            <a href="" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">HOME</div>
+            </a>
+          </li>
+
+          <!-- Layouts -->
+
+          <!-- Components -->
+          <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+          <!-- Cards -->
+          <li class="menu-item">
+            <a href="{% url 'materia' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <div data-i18n="Basic">Crear materia</div>
+            </a>
+          </li>
+          <!-- User interface -->
+          <li class="menu-item">
+            <a href="{% url 'plan' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-box"></i>
+              <div data-i18n="User interface">Plan microcurricular</div>
+            </a>
+          </li>
+
+          <!-- Extended components -->
+          <li class="menu-item">
+            <a href="{% url 'version' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-copy"></i>
+              <div data-i18n="Extended UI">Versiones</div>
+            </a>
+          </li>
+
+          <li class="menu-item">
+            <a href="{% url 'logout' %}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-crown"></i>
+              <div data-i18n="Boxicons">Cerrar sesion</div>
+            </a>
+          </li>
+
+          <!-- Forms & Tables -->
+
+          <!-- Misc -->
+        </ul>
+      </aside>
+      <!-- / Menu -->
+
+      <!-- Layout container -->
+      <div class="layout-page">
+        <!-- Navbar -->
+
+        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <!-- Search -->
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+
+              </div>
+
+
+            </div>
+          </div>
+
+        </nav>
+          <h1 style="text-align: center;">Seleccione uno de los accesos directos</h1>
+   <!-- Contenedor para centrar la imagen con borde blanco -->
+          <div style="position: absolute; top: 170px; left: 315px; width: 1030px; height: 300px; background-color: white; z-index: -1;"></div>
+
+          <div style="display: flex;">
+    <!-- Contenedor para la primera imagen con borde gris -->
+              <div class="nav-item d-flex align-items-center justify-content-center profile-pic"
+                   style="position: relative; width: 300px; height: 300px; margin-right: 10px; left: 60px;">
+      <!-- Aquí se agrega la imagen con el enlace -->
+                  <a href="https://classroom.google.com/" style="position: absolute; top: 100px; left: 50px; right: 0; bottom: 0;">
+                      <img src="{% static 'classroom1.jpg' %}" alt="Imagen con enlace" style="width: 120%; height: 90%; border: 2px solid gray;" />
+                  </a>
+              </div>
+
+    <!-- Contenedor para la segunda imagen con borde gris -->
+              <div class="nav-item d-flex align-items-center justify-content-center profile-pic"
+                   style="position: relative; width: 300px; height: 300px; margin-right: 10px; left: 70px;">
+      <!-- Aquí se agrega la imagen con el enlace -->
+                  <a href="http://academico.istg.edu.ec/menu.php" style="position: absolute; top: 100px; left: 50px; right: 0; bottom: 0;">
+                      <img src="{% static 'istg1.jpg' %}" alt="Imagen con enlace" style="width: 120%; height: 90%; border: 2px solid gray;" />
+                  </a>
+              </div>
+
+    <!-- Contenedor para la tercera imagen con borde gris -->
+              <div class="nav-item d-flex align-items-center justify-content-center profile-pic"
+                   style="position: relative; width: 300px; height: 300px; margin-right: 10px; left: 70px;">
+      <!-- Aquí se agrega la imagen con el enlace -->
+                  <a href="http://siga.institutos.gob.ec:8080/siga-web/ariel.jsf" style="position: absolute; top: 100px; left: 50px; right: 0; bottom: 0;">
+                      <img src="{% static 'siga1.jpg' %}" alt="Imagen con enlace" style="width: 120%; height: 90%; border: 2px solid gray;" />
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

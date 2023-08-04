@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Materia</title>
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{% static 'css/boxicons.css' %}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{% static 'css/theme-default.css' %}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
+
+
+
+</head>
+
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="" class="app-brand-link">
+                        <span class="app-brand-text deo menu-text fw-bolder ms-2"> </span>
+                    </a>
+                </div>
+                <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item">
+                        <a href="{% url 'principal' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">HOME</div>
+                        </a>
+                    </li>
+                    <!-- Components -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Componentes</span>
+                    </li>
+                    <!-- Cards -->
+                    <li class="menu-item active">
+                        <a href="{% url 'materia' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Crear materia</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'plan' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Plan microcurricular</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'version' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Versiones</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'logout' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-crown"></i>
+                            <div data-i18n="Boxicons">Cerrar sesion</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center"></div>
+                        </div>
+                        <!-- /Search -->
+
+                        <!-- Botón "Holiwis" -->
+                        <button type="button" id="btnmodal" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-nom="jose" data-ape="mendez">
+                            Crear materia
+
+                        </button>
+
+                    </div>
+                    <a href="{% url 'ensenar_informacion' %}" class="btn btn-primary">Actualizar</a>
+
+                </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DATOS INFORMATIVOS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario-informativo" method="post" action="{% url 'guardar_informacion' %}">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Carrera" class="">Carrera:</label>
+                                <input type="text" id="Carrera" name="carrera" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Periodo" class="">Periodo:</label>
+                                <input type="text" id="Periodo" name="periodo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <label for="id_asignatura">Asignatura:</label>
+                                <select name="id_asignatura" id="id_asignatura"  class="form-control selectize-input">
+                                    <option value="">Selecciona una asignatura</option>
+                                    {% for asignatura in asignaturas %}
+                                        <option value="{{ asignatura.id_asignatura }}">{{ asignatura.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Codigo" class="">Codigo:</label>
+                                <input type="text" id="Codigo" name="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Campoformacion" class="">Campo de formacion:</label>
+                                <input type="text" id="Campoformacion" name="informacion" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Prerrequisitos" class="">Prerrequisitos:</label>
+                                <input type="text" id="Prerrequisitos" name="prerrequisito" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Unidador" class="">Unidad Curricular:</label>
+                                <input type="text" id="Unidador" name="unidad_organ" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Correquisitos" class="">Correquisitos:</label>
+                                <input type="text" id="Correquisitos" name="correquisito" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="horasap" class="">Horas de Aprendizaje:</label>
+                                <input type="number" id="horasap" name="horas_docencia" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Profesional" class="">Profesional:</label>
+                                <input type="text" id="Profesional" name="profesional" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="horasdocente" class="">Horas con docente:</label>
+                                <input type="number" id="horasap" name="horas_prac_docente" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="horaspracticas" class="">Horas autonomas:</label>
+                                <input type="number" id="Profesional" name="horas_pract_autonoma" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="horasautonomo" class="">Horas trabajo autonomo:</label>
+                                <input type="number" id="horasap" name="horas_trab_autonomo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="formulario-informativo">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+                <div class="card" >
+                    <h5 class="card-header">
+                        <!-- ... -->
+                    </h5>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-white">
+                            <thead>
+                                <tr>
+                                    <th>Materia</th>
+                                    <th>Periodo</th>
+                                    <th>Carrera</th>
+                                    <th>Opcion</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                            {% for informativo in informativos %}
+                                <tr>
+                                    <td>{{ informativo.id_asignatura }}</td>
+                                    <td>{{ informativo.periodo }}</td>
+                                    <td>{{ informativo.carrera }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">
+                                            </button>
+                                            <a href="{% url 'borrar_informativo' id_informativo=informativo.id_informativo %}">Eliminar</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
+        </div>
+    </div>
+<script>
+$(document).ready(function() {
+  $('.selectize-input').selectize({
+    create: false, // No permitir agregar opciones personalizadas
+    sortField: 'text' // Ordenar opciones alfabéticamente
+  });
+});
+</script>
+</body>
+
+</html>

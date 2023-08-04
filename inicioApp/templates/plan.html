@@ -1,0 +1,626 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Plan Microcurrilar</title>
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{% static 'css/boxicons.css' %}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'css/core.css' %}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{% static 'css/theme-default.css' %}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}" />
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="" class="app-brand-link">
+                        <span class="app-brand-text deo menu-text fw-bolder ms-2"></span>
+                    </a>
+                </div>
+                <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item">
+                        <a href="{% url 'principal' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">HOME</div>
+                        </a>
+                    </li>
+                    <!-- Components -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Componentes</span>
+                    </li>
+                    <!-- Cards -->
+                    <li class="menu-item">
+                        <a href="{% url 'materia' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Crear materia</div>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="{% url 'plan' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Plan microcurricular</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'version' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Versiones</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'logout' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-crown"></i>
+                            <div data-i18n="Boxicons">Cerrar sesion</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center"></div>
+                        </div>
+                    </div>
+                    <a href="{% url 'ensenar_informacion2' %}" class="btn btn-primary">Actualizar</a>
+                </nav>
+
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formulario-informativo" method="post" action="{% url 'guardar_informacion2' %}">
+                                    {% csrf_token %}
+                                    <h5 class="modal-title" id="exampleModalLabel">UNIDADES TEMÁTICAS</h5>
+                                    <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <h5 class="modal-title" id="exampleModalLabel">UNIDAD 1</h5>
+                                                    <label for="unidad1">unidad 1</label>
+                                                    <input type="text" id="unidad1" name="nombre_unidad_1" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="objetivo">objetivo</label>
+                                                    <input type="text" id="objetivo" name="objetivo_unidad_1" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-3 contenidoContainer">
+                                                 <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer', 'text', 'form-control', 'contenido_unidad1')">+</button>
+                                                     <label for="contenido">contenido</label>
+                                                     <input type="text" id="contenido" name="contenido_unidad1_1" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad1_2" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad1_3" class="form-control">
+
+                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer2">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer2', 'number', 'form-control', 'hora_docencia_unidad1')">+</button>
+                                                    <label for="horasdo">horas docencia</label>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad1_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad1_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad1_3" class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 contenidoContainer3">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer3', 'number', 'form-control', 'hora_practica_unidad1')">+</button>
+                                                    <label for="horasge">horas practicas</label>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad1_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad1_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad1_3" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer4">
+                                                <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer4', 'number', 'form-control', 'horas_autonomas_unidad1')">+</button>
+                                                     <label for="horasau">horas autonoma</label>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad1_1" class="form-control">
+                                                     <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad1_2" class="form-control">
+                                                    <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad1_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h5 class="modal-title" id="exampleModalLabel">UNIDAD 2</h5>
+                                                    <label for="unidad2">unidad 2</label>
+                                                    <input type="text" id="unidad2" name="nombre_unidad_2" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="objetivo">objetivo</label>
+                                                    <input type="text" id="objetivo" name="objetivo_unidad_2" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-3 contenidoContainer5">
+                                                 <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer5', 'text', 'form-control', 'contenido_unidad2')">+</button>
+                                                     <label for="contenido">contenido</label>
+                                                     <input type="text" id="contenido" name="contenido_unidad2_1" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad2_2" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad2_3" class="form-control">
+
+                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer6">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer6', 'number', 'form-control', 'hora_docencia_unidad2')">+</button>
+                                                    <label for="horasdo">horas docencia</label>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad2_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad2_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad2_3" class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 contenidoContainer7">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer7', 'number', 'form-control', 'hora_practica_unidad2')">+</button>
+                                                    <label for="horasge">horas practicas</label>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad2_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad2_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad2_3" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer8">
+                                                <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer8', 'number', 'form-control', 'horas_autonomas_unidad2')">+</button>
+                                                     <label for="horasau">horas autonoma</label>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad2_1" class="form-control">
+                                                     <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad2_2" class="form-control">
+                                                    <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad2_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h5 class="modal-title" id="exampleModalLabel">UNIDAD 3</h5>
+                                                    <label for="unidad1">unidad 3</label>
+                                                    <input type="text" id="unidad1" name="nombre_unidad_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="objetivo">objetivo</label>
+                                                    <input type="text" id="objetivo" name="objetivo_unidad_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-3 contenidoContainer13">
+                                                 <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer13', 'text', 'form-control', 'contenido_unidad3')">+</button>
+                                                     <label for="contenido">contenido</label>
+                                                     <input type="text" id="contenido" name="contenido_unidad3_1" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad3_2" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad3_3" class="form-control">
+
+                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer14">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer14', 'number', 'form-control', 'hora_docencia_unidad3')">+</button>
+                                                    <label for="horasdo">horas docencia</label>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad3_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad3_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad3_3" class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 contenidoContainer15">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer15', 'number', 'form-control', 'hora_practica_unidad3')">+</button>
+                                                    <label for="horasge">horas practicas</label>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad3_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad3_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad3_3" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer16">
+                                                <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer16', 'number', 'form-control', 'horas_autonomas_unidad3')">+</button>
+                                                     <label for="horasau">horas autonoma</label>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad3_1" class="form-control">
+                                                     <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad3_2" class="form-control">
+                                                    <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad3_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <h5 class="modal-title" id="exampleModalLabel">UNIDAD 4</h5>
+                                                    <label for="unidad2">unidad 4</label>
+                                                    <input type="text" id="unidad2" name="nombre_unidad_4" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="objetivo">objetivo</label>
+                                                    <input type="text" id="objetivo" name="objetivo_unidad_4" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <br>
+                                            <div class="col-md-3 contenidoContainer9">
+                                                 <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer9', 'text', 'form-control', 'contenido_unidad4')">+</button>
+                                                     <label for="contenido">contenido</label>
+                                                     <input type="text" id="contenido" name="contenido_unidad4_1" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad4_2" class="form-control">
+                                                     <br>
+                                                     <input type="text" id="contenido" name="contenido_unidad4_3" class="form-control">
+
+                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer10">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer10', 'number', 'form-control', 'hora_docencia_unidad4')">+</button>
+                                                    <label for="horasdo">horas docencia</label>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad4_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad4_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasdo" name="hora_docencia_unidad4_3" class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 contenidoContainer11">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer11', 'number', 'form-control', 'hora_practica_unidad4')">+</button>
+                                                    <label for="horasge">horas practicas</label>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad4_1" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad4_2" class="form-control">
+                                                    <br>
+                                                    <input type="number" id="horasge" name="hora_practica_unidad4_3" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 contenidoContainer12">
+                                                <div class="form-group">
+                                                     <button type="button" class="btn btn-primary" onclick="addInput('contenidoContainer12', 'number', 'form-control', 'horas_autonomas_unidad4')">+</button>
+                                                     <label for="horasau">horas autonoma</label>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad4_1" class="form-control">
+                                                     <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad4_2" class="form-control">
+                                                    <br>
+                                                     <input type="number" id="horasau" name="horas_autonomas_unidad4_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+
+                                    <br>
+                                    <h5 class="modal-title" id="exampleModalLabel">AMBIENTES DE APRENDIZAJE</h5>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="metodoen">Metodos de enseñanza, Formas de enseñanza, Medios y Evualación</label>
+                                                    <textarea id="formade" name="detalle_ambiente" rows="8" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <br>
+                                    <h5 class="modal-title" id="exampleModalLabel">PRODUCTOS ACADÉMICOS</h5>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="metodoen">Producto Academico final de la asignatura</label>
+                                                    <input type="text" id="metodoen" name="detalle_academico" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <label for="formade">Objetivo 1</label>
+                                                    <input type="text" id="formade" name="objetivo_prod_academico_1" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="medios">Productos parciales</label>
+                                                    <input type="text" id="medios" name="productos_parciales_prod_academico_1" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Resultados y estándares de presentación</label>
+                                                    <textarea id="evualacion" name="resultados_prod_academico_1" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Integracion con otras asignaturas</label>
+                                                    <textarea id="evualacion" name="integracion_prod_academico_1" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <label for="formade">Objetivo 2</label>
+                                                    <input type="text" id="formade" name="objetivo_prod_academico_2" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="medios">Productos parciales</label>
+                                                    <input type="text" id="medios" name="productos_parciales_prod_academico_2" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Resultados y estándares de presentación</label>
+                                                    <textarea id="evualacion" name="resultados_prod_academico_2" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Integracion con otras asignaturas</label>
+                                                    <textarea id="evualacion" name="integracion_prod_academico_2" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <label for="formade">Objetivo 3</label>
+                                                    <input type="text" id="formade" name="objetivo_prod_academico_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="medios">Productos parciales</label>
+                                                    <input type="text" id="medios" name="productos_parciales_prod_academico_3" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Resultados y estándares de presentación</label>
+                                                    <textarea id="evualacion" name="resultados_prod_academico_3" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Integracion con otras asignaturas</label>
+                                                    <textarea id="evualacion" name="integracion_prod_academico_3" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <label for="formade">Objetivo 4</label>
+                                                    <input type="text" id="formade" name="objetivo_prod_academico_4" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="medios">Productos parciales</label>
+                                                    <input type="text" id="medios" name="productos_parciales_prod_academico_4" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Resultados y estándares de presentación</label>
+                                                    <textarea id="evualacion" name="resultados_prod_academico_4" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="evualacion">Integracion con otras asignaturas</label>
+                                                    <textarea id="evualacion" name="integracion_prod_academico_4" rows="3" cols="103"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <br>
+                                    <h5 class="modal-title" id="exampleModalLabel">REFERENCIAS</h5>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Basica</h5>
+                                                    <label for="metodoen">Título de la obra</label>
+                                                    <input type="text" id="metodoen" name="basica_1" class="form-control">
+                                                    <input type="text" id="metodoen" name="basica_2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                <br>
+                                    <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Complementaria</h5>
+                                                    <label for="metodoen">Título de la obra</label>
+                                                    <input type="text" id="metodoen" name="complementaria_1" class="form-control">
+                                                    <input type="text" id="metodoen" name="complementaria_2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <br>
+                                <br>
+                                    <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <h5 class="modal-title" id="exampleModalLabel">SITIOS WEB</h5>
+                                                    <label for="metodoen">Dirección electronica</label>
+                                                    <input type="text" id="metodoen" name="sitioweb_1" class="form-control">
+                                                    <input type="text" id="metodoen" name="sitioweb_2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <br>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" form="formulario-informativo">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" >
+                    <h5 class="card-header">
+                        <!-- ... -->
+                    </h5>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-white">
+                            <thead>
+                                <tr>
+                                    <th>Materia</th>
+                                    <th>Periodo</th>
+                                    <th>Carrera</th>
+                                    <th>Opcion</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                            {% for informativo in informativos %}
+                                <tr>
+                                    <td>{{ informativo.id_asignatura }}</td>
+                                    <td>{{ informativo.periodo }}</td>
+                                    <td>{{ informativo.carrera }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-primary btn-crear-plan" data-toggle="modal" data-target="#exampleModal" data-id_asignatura="{{ informativo.id_asignatura }}">
+                                                   Crear plan microcurricular
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
+        </div>
+    </div>
+<script>
+    const counters = {};
+
+    // Recorrer el rango de unidades y establecer los contadores para cada tipo de campo
+    for (let i = 1; i <= 4; i++) {
+        counters[`contenido_unidad${i}`] = 4;
+        counters[`hora_docencia_unidad${i}`] = 4;
+        counters[`hora_practica_unidad${i}`] = 4;
+        counters[`horas_autonomas_unidad${i}`] = 4;
+    }
+
+    function addInput(containerClass, inputType, inputClass, inputName) {
+        const container = document.querySelector("." + containerClass);
+        const newInput = document.createElement("input");
+        newInput.type = inputType;
+        newInput.name = inputName + "_" + counters[inputName]; // Agregar el contador correspondiente al nombre del campo
+        newInput.className = inputClass;
+        container.appendChild(document.createElement("br"));
+        container.appendChild(newInput);
+        counters[inputName]++; // Incrementar el contador correspondiente para el próximo campo
+    }
+</script>
+
+</body>
+
+</html>

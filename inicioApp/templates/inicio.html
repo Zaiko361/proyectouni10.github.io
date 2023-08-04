@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>inicio de sesion</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/inicio2.css' %}"/>
+</head>
+<body>
+  <div class="page-container">
+    <div class="container">
+      <img src="{% static 'istg.jpeg' %}" alt="Foto de usuario" class="profile-pic">
+      <h2>Iniciar sesión</h2>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="username1">Usuario:</label>
+          <input type="text" id="username1" name="username" required>
+        </div>
+        <div class="input-group">
+          <label for="password1">Contraseña:</label>
+          <input type="password" id="password1" name="password" required>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="animated-button">Iniciar sesión</button>
+            <label for="password1">usuario:123 contraseña:123</label>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</body>
+</html>
